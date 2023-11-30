@@ -15,7 +15,22 @@ RUN apt-get update; apt-get install curl apt-transport-https ca-certificates -y
 RUN apt-get update && apt-get install git google-cloud-sdk git chromium wget unzip tesseract-ocr gcc python-dev libjpeg-dev zlib1g-dev -y
 
 # PostgreSQL dependecies
-RUN apt-get update && apt-get install libpq-dev -y
+RUN apt-get update && apt-get install libpq-dev -y && \
+# Install Chrome WebDriver
+wget "http://chromedriver.storage.googleapis.com/90.0.4430.24/chromedriver_linux64.zip" && \
+unzip chromedriver_linux64.zip && \
+mv chromedriver /usr/lib/chromium/chromedriver && \
+chown root:root /usr/lib/chromium/chromedriver && \
+chmod +x /usr/lib/chromium/chromedriver
+
+
+
+# Set the Chrome repo.
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+
+# Install Chrome.
+RUN apt-get update && apt-get -y install google-chrome-stable
 
 # unpacking SSH key
 RUN mkdir -p ~/.ssh && umask 0077 && echo "${SSH_PRIVATE_KEY}" > ~/.ssh/id_rsa \
