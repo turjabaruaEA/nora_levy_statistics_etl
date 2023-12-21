@@ -14,11 +14,11 @@ steps:
     entrypoint: 'sh'
     args: [
         '-c',
-        'docker build --build-arg SSH_PRIVATE_KEY="$(cat /root/.ssh/id_github)" -f Dockerfile -t gcr.io/$PROJECT_ID/{nora-levy-statistic-etl} .'
+        'docker build --build-arg SSH_PRIVATE_KEY="$(cat /root/.ssh/id_github)" -f Dockerfile -t gcr.io/$PROJECT_ID/nora-levy-statistic-etl .'
     ]
     volumes:
       - name: 'ssh'
         path: /root/.ssh
 
-images: ['gcr.io/$PROJECT_ID/{nora-levy-statistic-etl}']
+images: ['gcr.io/$PROJECT_ID/nora-levy-statistic-etl']
 timeout: '1200s'
