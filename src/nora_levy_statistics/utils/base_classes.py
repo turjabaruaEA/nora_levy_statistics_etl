@@ -1,5 +1,5 @@
 from nora_levy_statistics.utils import *
-from helper_functions_ea import Logger, ShoojuTools
+from helper_functions_ea import Logger
 
 class BaseVariables:
     arguments = parsed_args
