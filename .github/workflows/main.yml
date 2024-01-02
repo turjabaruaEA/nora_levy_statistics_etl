@@ -42,7 +42,7 @@ jobs:
         run: python setup.py install
 
       - name: Run sample ETL
-        run: {{insert command here}}} --environment tests
+        run: nora_levy_statistics --environment tests
         env:
           SHOOJU_USER: '${{ secrets.SHOOJU_USER }}'
           SHOOJU_SERVER: '${{ secrets.SHOOJU_SERVER }}'
